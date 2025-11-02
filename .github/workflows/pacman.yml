@@ -25,11 +25,6 @@ jobs:
           github_user_name: 'cheepi'
           output_dir: 'output'
 
-      - name: List files after generation
-        run: |
-          echo "Listing files in the directory:"
-          ls -R
-
       - name: Commit & Push SVG
         run: |
           git config --global user.name "GitHub Actions Bot"
