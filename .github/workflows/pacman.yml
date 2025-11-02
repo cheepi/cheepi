@@ -22,7 +22,7 @@ jobs:
       - name: Generate Pacman SVG
         uses: abozanona/pacman-contribution-graph@main
         with:
-          github_user_name: 'YOUR_USERNAME'
+          github_user_name: 'cheepi'
 
       - name: List files after generation
         run: |
