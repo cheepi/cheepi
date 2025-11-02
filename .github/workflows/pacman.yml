@@ -23,7 +23,6 @@ jobs:
         uses: abozanona/pacman-contribution-graph@main
         with:
           github_user_name: 'YOUR_USERNAME'
-          output_dir: 'output'
 
       - name: List files after generation
         run: |
