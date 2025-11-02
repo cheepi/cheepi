@@ -1,0 +1,43 @@
+name: Generate Pacman Contribution Graph
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  generate-svg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Generate Pacman SVG
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: 'cheepi'
+          output_dir: 'output'
+
+      - name: List files after generation
+        run: |
+          echo "Listing files in the directory:"
+          ls -R
+
+      - name: Commit & Push SVG
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+          git add output/pacman-contribution-graph.svg
+          git add output/pacman-contribution-graph-dark.svg
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update pacman contribution graph"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
