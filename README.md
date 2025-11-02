@@ -13,9 +13,9 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="output/pacman-contribution-graph-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="output/pacman-contribution-graph.svg" />
-    <img alt="Pac-Man Contribution Graph" src="output/pacman-contribution-graph.svg" />
+    <source media="(prefers-color-scheme: dark)" srcset="dist/pacman-contribution-graph-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="dist/pacman-contribution-graph.svg" />
+    <img alt="Pac-Man Contribution Graph" src="dist/pacman-contribution-graph.svg" />
   </picture>
 </p>
 
