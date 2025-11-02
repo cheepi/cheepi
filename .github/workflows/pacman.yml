@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   generate-svg:
@@ -21,15 +22,33 @@ jobs:
       - name: Generate Pacman SVG
         uses: abozanona/pacman-contribution-graph@main
         with:
-          github_user_name: 'cheepi'
+          github_user_name: 'YOUR_USERNAME'
           output_dir: 'output'
+
+      - name: List files after generation
+        run: |
+          echo "Listing files in workspace root:"
+          ls -la
+          echo "Listing files in output/:"
+          ls -la output || echo "output/ not found"
 
       - name: Commit & Push SVG
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions-bot@github.com"
-          git add output/pacman-contribution-graph.svg
-          git add output/pacman-contribution-graph-dark.svg
+
+          if [ -f output/pacman-contribution-graph.svg ]; then
+            git add output/pacman-contribution-graph.svg
+          else
+            echo "output/pacman-contribution-graph.svg not found"
+          fi
+
+          if [ -f output/pacman-contribution-graph-dark.svg ]; then
+            git add output/pacman-contribution-graph-dark.svg
+          else
+            echo "output/pacman-contribution-graph-dark.svg not found"
+          fi
+
           if ! git diff --staged --quiet; then
             git commit -m "chore: update pacman contribution graph"
             git push
